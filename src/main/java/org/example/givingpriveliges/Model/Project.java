@@ -20,4 +20,7 @@ public class Project {
     private String name;
     @ManyToMany(mappedBy = "projects", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<User> users = new HashSet<>();
+    public String toString(){
+        return "id"+id+"name"+name;
+    }
 }

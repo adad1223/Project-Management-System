@@ -14,6 +14,7 @@ import org.example.givingpriveliges.Model.Project;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -40,6 +41,12 @@ public class UserService {
         User user = userRepo.findById(id).orElse(null);
         return user;
     }
+    public Set<Project> getProjectsForAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepo.findById(username).orElse(null);
+        return user != null ? user.getProjects() : null;
+    }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public User CreateUserforProject(User user,long id){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
@@ -53,5 +60,17 @@ public class UserService {
         }
         return userRepo.save(user);
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String addExistingUsertoProject(String username,long id){
+        User users=userRepo.findById(username).orElse(null);
+        Project pr=projectRepository.findById(id).orElse(null);
+        if (users!=null && pr!=null){
+            users.getProjects().add(pr);
+        }
+        userRepo.save(users);
+        return "SUCCESS";
+    }
+
+
     }
 

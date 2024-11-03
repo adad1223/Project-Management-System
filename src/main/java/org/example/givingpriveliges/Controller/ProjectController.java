@@ -15,7 +15,8 @@ import java.util.Optional;
 public class ProjectController {
     @Autowired
     private UserService userService;
-//    @Autowired
+    @Autowired
+    private Pr prService;
     @PostMapping
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public User addUser(@RequestBody User user) throws Exception {

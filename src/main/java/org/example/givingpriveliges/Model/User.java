@@ -1,5 +1,6 @@
 package org.example.givingpriveliges.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +20,7 @@ public class User {
     @JoinTable(name="user_projec",
     joinColumns = @JoinColumn(name="username"),
     inverseJoinColumns = @JoinColumn(name="project_id"))
+    @JsonIgnore
     private Set<Project> projects=new HashSet<>();
+
 }
