@@ -8,10 +8,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.example.givingpriveliges.Model.Project;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -71,6 +74,19 @@ public class UserService {
         return "SUCCESS";
     }
 
-
+    public UserDetails loadUserByUsername(String userName) {
+        User user = userRepo.findById(userName).orElse(null);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return null;
     }
+
+
+//    public String login(User user) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//
+//
+//    }
+}
 
