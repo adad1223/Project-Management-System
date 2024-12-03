@@ -27,6 +27,9 @@ public class JWTService {
     public JWTService() {
         this.secretKey = generateSecretKey();
     }
+    public String fetchSecretKey() {
+        return secretKey;
+    }
     public String generateSecretKey() {
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
@@ -43,7 +46,7 @@ public class JWTService {
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*30))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*3))
                 .signWith(getKey(), SignatureAlgorithm.HS256).compact();
 
     }

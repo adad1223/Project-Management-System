@@ -37,11 +37,16 @@ public class Config {
         http.csrf(req -> req.disable())
                 .authorizeRequests(req -> req
                         .requestMatchers("/api/user/login").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//        .formLogin(form -> form
+//                .loginPage("/login") // Specify your custom login page URL
+//                .permitAll()
+//        );
         return http.build();
     }
     @Bean
