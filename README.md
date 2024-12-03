@@ -10,6 +10,7 @@ This is a Spring Boot-based Project Management System with full CRUD functionali
 	•	Role-based Authorization: Access control using roles (e.g., Admin, User) to restrict sensitive actions.
 	•	RESTful API: All interactions are managed through RESTful endpoints, supporting JSON input and output.
 	•	Project and Task Management: Organize projects, track tasks, assign users, and monitor progress.
+ 	. 	JWT using Sliding Window: Implemented JSON Web Token (JWT) using a sliding window to enhance security and manage session expiration dynamically.
 
 ## Tech Stack
 
